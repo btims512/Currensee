@@ -1,36 +1,35 @@
 import React from "react";
-import { TextField } from "@material-ui/core";
+import { TextField, InputAdornment } from "@material-ui/core";
 import { useStyles } from "../styles";
 import { currencyFlags } from "./RateTable";
 
 export function AmountField({ amount, onChange, currencyCode }) {
   const classes = useStyles();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  // Get the flag for the currency code
+  const flag = currencyFlags[currencyCode];
+
+  // Define inline styles for the flag element
+  const flagStyles = { fontSize: "2.5em", paddingTop: "10px" };
 
   return (
-    <form className={classes.exchangeRateForm} onSubmit={handleSubmit}>
+    <form className={classes.exchangeRateForm}>
       <TextField
-        // label="Amount in base currency"
         type="text"
-        value={`${currencyFlags[currencyCode]} ${amount}`}
+        value={amount}
         onChange={onChange}
         fullWidth
         margin="normal"
         className={classes.textField}
-        InputProps={{ classes: { input: classes.input } }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <span style={flagStyles}>{flag}</span>
+            </InputAdornment>
+          ),
+          classes: { input: classes.input },
+        }}
       />
     </form>
   );
 }
-
-export function HandleReset() {
-  Array.from(document.querySelectorAll("input"));
-  this.setState({
-    itemvalues: [{}],
-  });
-}
-
-

@@ -7,8 +7,6 @@ import {
   TableRow,
 } from "@material-ui/core";
 
-// import { currencyFlags } from "./CurrencyFlags";
-
 const currencyFlags = {
   USD: "🇺🇸",
   EUR: "🇪🇺",

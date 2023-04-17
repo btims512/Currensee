@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "rgba(0, 0, 0, 0.87)",
   },
   exchangeRateHeader: {
-    margin: 0,
+    marginLeft: 20,
     padding: 0,
     textAlign: "center",
   },
@@ -52,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
   },
   textField: {
-    maxWidth: "300px",
+    maxWidth: "200px",
   },
   tableCell: {
     paddingBottom: "1em",
