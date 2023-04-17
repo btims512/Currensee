@@ -1,8 +1,9 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 import { useStyles } from "../styles";
+import { currencyFlags } from "./RateTable";
 
-export function AmountField({ amount, onChange }) {
+export function AmountField({ amount, onChange, currencyCode }) {
   const classes = useStyles();
 
   const handleSubmit = (e) => {
@@ -12,9 +13,9 @@ export function AmountField({ amount, onChange }) {
   return (
     <form className={classes.exchangeRateForm} onSubmit={handleSubmit}>
       <TextField
-        label="Amount in base currency"
+        // label="Amount in base currency"
         type="text"
-        value={amount}
+        value={`${currencyFlags[currencyCode]} ${amount}`}
         onChange={onChange}
         fullWidth
         margin="normal"
@@ -31,3 +32,5 @@ export function HandleReset() {
     itemvalues: [{}],
   });
 }
+
+

@@ -7,14 +7,15 @@ import {
   TableRow,
 } from "@material-ui/core";
 
+// import { currencyFlags } from "./CurrencyFlags";
+
 const currencyFlags = {
   USD: "🇺🇸",
   EUR: "🇪🇺",
   JPY: "🇯🇵",
-  CAD: "🇨🇦",
   GBP: "🇬🇧",
-  MXN: "🇲🇽",
   AUD: "🇦🇺",
+  CAD: "🇨🇦",
   CHF: "🇨🇭",
   CNY: "🇨🇳",
   SEK: "🇸🇪",
@@ -22,6 +23,7 @@ const currencyFlags = {
   HKD: "🇭🇰",
   SGD: "🇸🇬",
   INR: "🇮🇳",
+  MXN: "🇲🇽",
   PHP: "🇵🇭",
   THB: "🇹🇭",
 };
@@ -59,3 +61,5 @@ export function RateTable({ currencyData, amount }) {
     </Table>
   );
 }
+
+export { currencyFlags };

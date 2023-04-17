@@ -1,30 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
 import { Container, Typography, Box } from "@material-ui/core";
-import { RateTable } from "./RateTable";
 import { CurrencyCodePicker } from "./CurrencyCodePicker";
 import { AmountField } from "./AmountField";
 import { getExchangeRates } from "../api";
+import { RateTable } from "./RateTable";
 import { useStyles } from "../styles";
 
-const supportedCurrencies = [
-  "USD",
-  "EUR",
-  "JPY",
-  "GBP",
-  "AUD",
-  "CAD",
-  "CHF",
-  "CNY",
-  "SEK",
-  "NZD",
-  // Add more currency codes here
-  "HKD",
-  "SGD",
-  "INR",
-  "MXN",
-  "PHP",
-  "THB",
-];
+const supportedCurrencies = ["USD", "EUR", "JPY", "GBP", "CAD", "MXN"];
 
 export function ExchangeRate() {
   const [amount, setAmount] = useState("1.50");
@@ -34,8 +16,19 @@ export function ExchangeRate() {
   const classes = useStyles();
 
   useEffect(() => {
-    getExchangeRates(currencyCode, supportedCurrencies).then((rates) => {
-      setCurrencyData(rates);
+    getExchangeRates("EUR", supportedCurrencies).then((rates) => {
+      const conversionRate = 1 / rates[currencyCode];
+
+      const convertedRates = Object.fromEntries(
+        Object.entries(rates).map(([code, rate]) => [
+          code,
+          rate * conversionRate,
+        ])
+      );
+
+      convertedRates[currencyCode] = 1.0;
+
+      setCurrencyData(convertedRates);
     });
   }, [currencyCode]);
 
@@ -65,7 +58,12 @@ export function ExchangeRate() {
           currencyCode={currencyCode}
           onChange={handleCurrencyCode}
         />
-        <AmountField amount={amount} onChange={handleAmountChange} />
+        <AmountField
+          amount={amount}
+          onChange={handleAmountChange}
+          currencyCode={currencyCode}
+        />
+
         <RateTable currencyData={currencyData} amount={amount} />
       </Box>
     </Container>
